@@ -24,6 +24,9 @@ pipeline {
         stage ('checkout scm') {
             steps {
                 checkout(scm)
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
 
